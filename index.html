@@ -371,8 +371,22 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, pseudo, password }),
           });
+
+          // AMÉLIORATION DE LA GESTION D'ERREUR
+          if (!response.ok) {
+            // Si le statut n'est pas 2xx, on essaie de lire l'erreur en JSON
+            // S'il n'y a pas de JSON, on affiche un message générique.
+            let errorMsg = "Une erreur serveur est survenue.";
+            try {
+              const errorData = await response.json();
+              errorMsg = errorData.msg || errorMsg;
+            } catch (jsonError) {
+              // Le corps de la réponse n'était pas du JSON, on garde le message générique.
+            }
+            throw new Error(errorMsg);
+          }
+
           const data = await response.json();
-          if (!response.ok) throw new Error(data.msg);
           afficherMessage(
             registerMessageEl,
             data.msg + " Vous pouvez maintenant vous connecter.",
