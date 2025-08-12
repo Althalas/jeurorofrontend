@@ -1,0 +1,9 @@
+body {
+  background-color: #eef5ff;
+}
+.game-container {
+  background-image: url("https://images.unsplash.com/photo-1529078839843-1e493eacb0a4?q=80&w=2070&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  min-height: 250px;
+}
