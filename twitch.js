@@ -1,6 +1,8 @@
 function initializeTwitchEmbeds() {
   const streamerChannel = "rorolebateau"; // Changez ici pour le nom de la chaîne que vous voulez afficher
-  const deployedDomain = "https://jeurorofrontend.vercel.app/";
+  const parentDomain = window.location.hostname; // On utilise le domaine actuel pour le paramètre parent
+
+  console.log("Domaine détecté pour l'intégration Twitch:", parentDomain);
 
   // Création du lecteur vidéo
   new Twitch.Embed("twitch-embed", {
@@ -8,14 +10,14 @@ function initializeTwitchEmbeds() {
     height: "100%",
     channel: streamerChannel,
     layout: "video",
-    parent: [deployedDomain], // Requis par Twitch pour la sécurité
+    parent: [parentDomain], // Requis par Twitch pour la sécurité
   });
 
   const chatContainer = document.getElementById("twitch-chat-embed");
   const chatIframe = document.createElement("iframe");
 
   // Utilisation de l'URL "popout" avec le paramètre "darkpopout"
-  const chatURL = `https://www.twitch.tv/popout/${streamerChannel}/chat?darkpopout&parent=${deployedDomain}`;
+  const chatURL = `https://www.twitch.tv/popout/${streamerChannel}/chat?darkpopout&parent=${parentDomain}`;
 
   chatIframe.setAttribute("src", chatURL);
   chatIframe.setAttribute("height", "100%");
