@@ -2,6 +2,8 @@ function initializeTwitchEmbeds() {
   const streamerChannel = "rorolebateau"; // Changez ici pour le nom de la chaîne que vous voulez afficher
   const parentDomain = window.location.hostname; // On utilise le domaine actuel pour le paramètre parent
 
+  console.log("Domaine détecté pour l'intégration Twitch:", parentDomain);
+
   // Création du lecteur vidéo
   new Twitch.Embed("twitch-embed", {
     width: "100%",
