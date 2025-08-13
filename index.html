@@ -333,42 +333,30 @@
       }
 
       async function handleRegister(e) {
-        e.preventDefault();
-        const email = document.getElementById("register-email").value;
-        const pseudo = document.getElementById("register-pseudo").value;
-        const password = document.getElementById("register-password").value;
-        try {
-          const response = await fetch(`${API_URL}/api/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, pseudo, password }),
-          });
-
-          // AMÉLIORATION DE LA GESTION D'ERREUR
-          if (!response.ok) {
-            // Si le statut n'est pas 2xx, on essaie de lire l'erreur en JSON
-            // S'il n'y a pas de JSON, on affiche un message générique.
-            let errorMsg = "Une erreur serveur est survenue.";
+            e.preventDefault();
+            const pseudo = document.getElementById('register-pseudo').value;
+            const password = document.getElementById('register-password').value;
             try {
-              const errorData = await response.json();
-              errorMsg = errorData.msg || errorMsg;
-            } catch (jsonError) {
-              // Le corps de la réponse n'était pas du JSON, on garde le message générique.
+                const response = await fetch(`${API_URL}/api/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pseudo, password }),
+                });
+                if (!response.ok) {
+                    let errorMsg = "Une erreur serveur est survenue.";
+                    try {
+                        const errorData = await response.json();
+                        errorMsg = errorData.msg || errorMsg;
+                    } catch (jsonError) {}
+                    throw new Error(errorMsg);
+                }
+                const data = await response.json();
+                afficherMessage(registerMessageEl, data.msg + " Vous pouvez maintenant vous connecter.", true);
+                registerForm.reset();
+            } catch (error) {
+                afficherMessage(registerMessageEl, error.message, false);
             }
-            throw new Error(errorMsg);
-          }
-
-          const data = await response.json();
-          afficherMessage(
-            registerMessageEl,
-            data.msg + " Vous pouvez maintenant vous connecter.",
-            true
-          );
-          registerForm.reset();
-        } catch (error) {
-          afficherMessage(registerMessageEl, error.message, false);
         }
-      }
 
       function logout() {
         localStorage.removeItem("token");
