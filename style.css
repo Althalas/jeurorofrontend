@@ -22,4 +22,5 @@ body {
 }
 .twitch-chat-container {
   height: 500px; /* Hauteur fixe pour le chat */
+  overflow-y: auto; /* Permet le défilement */
 }
