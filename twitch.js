@@ -12,19 +12,6 @@ function initializeTwitchEmbeds() {
     layout: "video",
     parent: [parentDomain], // Requis par Twitch pour la sécurité
   });
-
-  const chatContainer = document.getElementById("twitch-chat-embed");
-  const chatIframe = document.createElement("iframe");
-
-  // Utilisation de l'URL "popout" avec le paramètre "darkpopout"
-  const chatURL = `https://www.twitch.tv/popout/${streamerChannel}/chat?darkpopout&parent=${parentDomain}`;
-
-  chatIframe.setAttribute("src", chatURL);
-  chatIframe.setAttribute("height", "100%");
-  chatIframe.setAttribute("width", "100%");
-
-  chatContainer.innerHTML = "";
-  chatContainer.appendChild(chatIframe);
 }
 
 // On attend que la page soit entièrement chargée pour initialiser les embeds
