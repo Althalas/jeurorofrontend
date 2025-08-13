@@ -309,28 +309,30 @@
 
       // --- Logique d'authentification ---
       async function handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById("login-email").value;
-        const password = document.getElementById("login-password").value;
-        try {
-          const response = await fetch(`${API_URL}/api/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-          });
-          const data = await response.json();
-          if (!response.ok) throw new Error(data.msg);
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          currentUser = data.user;
-          token = data.token;
-          await updateUIForLoggedInUser();
-          authModal.hide();
-          loginForm.reset();
-        } catch (error) {
-          afficherMessage(loginMessageEl, error.message, false);
+            e.preventDefault();
+            // CORRECTION : Utiliser 'login-pseudo' au lieu de 'login-email'
+            const pseudo = document.getElementById('login-pseudo').value;
+            const password = document.getElementById('login-password').value;
+            try {
+                const response = await fetch(`${API_URL}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    // CORRECTION : Envoyer 'pseudo' dans le corps de la requête
+                    body: JSON.stringify({ pseudo, password }),
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.msg || "Erreur de connexion");
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                currentUser = data.user;
+                token = data.token;
+                await updateUIForLoggedInUser();
+                authModal.hide();
+                loginForm.reset();
+            } catch (error) {
+                afficherMessage(loginMessageEl, error.message, false);
+            }
         }
-      }
 
        async function handleRegister(e) {
             e.preventDefault();
