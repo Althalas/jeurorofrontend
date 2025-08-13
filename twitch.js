@@ -2,8 +2,6 @@ function initializeTwitchEmbeds() {
   const streamerChannel = "rorolebateau"; // Changez ici pour le nom de la chaîne que vous voulez afficher
   const deployedDomain = "https://jeurorofrontend.vercel.app/";
 
-  console.log("Domaine détecté pour l'intégration Twitch:", parentDomain);
-
   // Création du lecteur vidéo
   new Twitch.Embed("twitch-embed", {
     width: "100%",
