@@ -145,28 +145,45 @@
       </main>
     </div>
 
-    <!-- Fenêtre Modale pour l'Authentification (MISE À JOUR) -->
-    <div
-      class="modal fade"
-      id="authModal"
-      tabindex="-1"
-      aria-labelledby="authModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="authModalLabel">
-              Authentification
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
+     <!-- Fenêtre Modale pour l'Authentification -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h1 class="modal-title fs-5" id="authModalLabel">Authentification</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body">
+                    <!-- Connexion Twitch -->
+                    <a href="https://la-peche-du-capitaine-roro-backend.onrender.com/api/auth/twitch" class="btn w-100 mb-3" style="background-color: #9146FF; color: white;">
+                        <i class="bi bi-twitch"></i> Se connecter avec Twitch
+                    </a>
+                    <hr>
+                    <!-- Connexion par Pseudo/Mot de passe -->
+                    <ul class="nav nav-tabs" id="authTab" role="tablist">
+                        <li class="nav-item" role="presentation"><button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane" type="button" role="tab">Connexion</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-tab-pane" type="button" role="tab">Inscription</button></li>
+                    </ul>
+                    <div class="tab-content pt-3" id="authTabContent">
+                        <div class="tab-pane fade show active" id="login-tab-pane" role="tabpanel">
+                             <form id="login-form">
+                                <div class="mb-3"><label for="login-pseudo" class="form-label">Pseudo</label><input type="text" class="form-control" id="login-pseudo" required></div>
+                                <div class="mb-3"><label for="login-password" class="form-label">Mot de passe</label><input type="password" class="form-control" id="login-password" required></div>
+                                <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                            </form>
+                            <div id="login-message" class="mt-3 text-center fw-semibold" style="height: 24px;"></div>
+                        </div>
+                        <div class="tab-pane fade" id="register-tab-pane" role="tabpanel">
+                            <form id="register-form">
+                                <div class="mb-3"><label for="register-pseudo" class="form-label">Pseudo</label><input type="text" class="form-control" id="register-pseudo" required></div>
+                                <div class="mb-3"><label for="register-password" class="form-label">Mot de passe</label><input type="password" class="form-control" id="register-password" required></div>
+                                <button type="submit" class="btn btn-success w-100">Créer un compte</button>
+                            </form>
+                            <div id="register-message" class="mt-3 text-center fw-semibold" style="height: 24px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <!-- NOUVEAU : Bouton de connexion Twitch -->
             <a
               href="https://la-peche-du-capitaine-roro-backend.onrender.com/api/auth/twitch"
