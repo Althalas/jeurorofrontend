@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>La Pêche du Capitaine Roro</title>
+    <title>Pêche-Ami - Le Jeu</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,15 +12,39 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background-color: #eef5ff;
+      }
+      .game-container {
+        background-image: url("https://images.unsplash.com/photo-1529078839843-1e493eacb0a4?q=80&w=2070&auto.format&fit=crop");
+        background-size: cover;
+        background-position: center;
+        min-height: 250px;
+      }
+      .twitch-embed-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+      }
+      .twitch-embed-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .twitch-chat-container {
+        height: 500px;
+        overflow-y: auto;
+      }
+    </style>
   </head>
   <body class="text-secondary">
     <div class="container my-4 my-md-5">
       <header class="text-center mb-5">
-        <h1 class="display-4 fw-bold text-primary">
-          La Pêche du Capitaine Roro
-        </h1>
-        <p class="lead text-primary-emphasis">Le jeu de pêche ultime</p>
+        <h1 class="display-4 fw-bold text-primary">Pêche-Ami</h1>
+        <p class="lead text-primary-emphasis">Le jeu de pêche relaxant</p>
         <div id="auth-buttons" class="d-flex justify-content-center gap-2">
           <button
             class="btn btn-outline-primary"
@@ -40,51 +64,12 @@
           </button>
         </div>
       </header>
-      <section class="mt-5">
-        <h2 class="display-6 fw-bold text-primary text-center mb-4">
-          Live Twitch
-        </h2>
-        <div class="row g-4">
-          <!-- Lecteur Vidéo -->
-          <div class="col-lg-8">
-            <div class="card shadow-sm">
-              <div class="card-header">
-                <h3 class="h5 mb-0">
-                  <i class="bi bi-twitch"></i> Stream en direct
-                </h3>
-              </div>
-              <div class="card-body">
-                <!-- Le conteneur pour le lecteur vidéo Twitch -->
-                <div id="twitch-embed" class="twitch-embed"></div>
-              </div>
-            </div>
-          </div>
-          <!-- Chat -->
-          <div class="col-lg-4">
-            <div class="card shadow-sm">
-              <div class="card-header">
-                <h3 class="h5 mb-0"><i class="bi bi-chat-dots"></i> Chat</h3>
-              </div>
-              <div class="card-body p-0">
-                <!-- Le conteneur pour le chat Twitch -->
-                <div id="twitch-chat-embed" class="twitch-chat-container">
-                  <iframe
-                    id="twitch-chat-embed"
-                    src="https://www.twitch.tv/embed/rorolebateau/chat?darkpopout&parent=jeurorofrontend.vercel.app"
-                    height="100%"
-                    width="100%"
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
       <main class="row g-4">
         <div class="col-lg-8">
           <div class="card shadow-sm h-100">
             <div class="card-header">
-              <h2 class="h4 mb-0">A la pêche moussaillon !</h2>
+              <h2 class="h4 mb-0">Partie de Pêche</h2>
             </div>
             <div class="card-body d-flex flex-column">
               <div
@@ -103,7 +88,7 @@
                   class="btn btn-primary btn-lg rounded-pill px-5 shadow"
                   disabled
                 >
-                  Lancer la ligne !
+                  Lancer la ligne
                 </button>
               </div>
               <div
@@ -143,69 +128,177 @@
           </div>
         </aside>
       </main>
-    </div>
 
-     <!-- Fenêtre Modale pour l'Authentification -->
-    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"><h1 class="modal-title fs-5" id="authModalLabel">Authentification</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <div class="modal-body">
-                    <!-- Connexion Twitch -->
-                    <a href="https://la-peche-du-capitaine-roro-backend.onrender.com/api/auth/twitch" class="btn w-100 mb-3" style="background-color: #9146FF; color: white;">
-                        <i class="bi bi-twitch"></i> Se connecter avec Twitch
-                    </a>
-                    <hr>
-                    <!-- Connexion par Pseudo/Mot de passe -->
-                    <ul class="nav nav-tabs" id="authTab" role="tablist">
-                        <li class="nav-item" role="presentation"><button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane" type="button" role="tab">Connexion</button></li>
-                        <li class="nav-item" role="presentation"><button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-tab-pane" type="button" role="tab">Inscription</button></li>
-                    </ul>
-                    <div class="tab-content pt-3" id="authTabContent">
-                        <div class="tab-pane fade show active" id="login-tab-pane" role="tabpanel">
-                             <form id="login-form">
-                                <div class="mb-3"><label for="login-pseudo" class="form-label">Pseudo</label><input type="text" class="form-control" id="login-pseudo" required></div>
-                                <div class="mb-3"><label for="login-password" class="form-label">Mot de passe</label><input type="password" class="form-control" id="login-password" required></div>
-                                <button type="submit" class="btn btn-primary w-100">Se connecter</button>
-                            </form>
-                            <div id="login-message" class="mt-3 text-center fw-semibold" style="height: 24px;"></div>
-                        </div>
-                        <div class="tab-pane fade" id="register-tab-pane" role="tabpanel">
-                            <form id="register-form">
-                                <div class="mb-3"><label for="register-pseudo" class="form-label">Pseudo</label><input type="text" class="form-control" id="register-pseudo" required></div>
-                                <div class="mb-3"><label for="register-password" class="form-label">Mot de passe</label><input type="password" class="form-control" id="register-password" required></div>
-                                <button type="submit" class="btn btn-success w-100">Créer un compte</button>
-                            </form>
-                            <div id="register-message" class="mt-3 text-center fw-semibold" style="height: 24px;"></div>
-                        </div>
-                    </div>
-                </div>
+      <section class="mt-5">
+        <h2 class="display-6 fw-bold text-primary text-center mb-4">
+          Live Twitch
+        </h2>
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h3 class="h5 mb-0">
+                  <i class="bi bi-twitch"></i> Stream en direct
+                </h3>
+              </div>
+              <div class="card-body p-0">
+                <div id="twitch-embed" class="twitch-embed-container"></div>
+              </div>
             </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h3 class="h5 mb-0"><i class="bi bi-chat-dots"></i> Chat</h3>
+              </div>
+              <div class="card-body p-0">
+                <div class="twitch-chat-container">
+                  <iframe
+                    src="https://www.twitch.tv/embed/rorolebateau/chat?darkpopout&parent=jeurorofrontend.vercel.app"
+                    height="100%"
+                    width="100%"
+                  >
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
     </div>
 
-            <!-- NOUVEAU : Bouton de connexion Twitch -->
+    <!-- Fenêtre Modale pour l'Authentification -->
+    <div
+      class="modal fade"
+      id="authModal"
+      tabindex="-1"
+      aria-labelledby="authModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="authModalLabel">
+              Authentification
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Connexion Twitch -->
             <a
               href="https://la-peche-du-capitaine-roro-backend.onrender.com/api/auth/twitch"
-              class="btn w-100"
+              class="btn w-100 mb-3"
               style="background-color: #9146ff; color: white"
             >
               <i class="bi bi-twitch"></i> Se connecter avec Twitch
             </a>
             <hr />
-            <!-- Onglets pour la connexion par email -->
+            <!-- Connexion par Pseudo/Mot de passe -->
             <ul class="nav nav-tabs" id="authTab" role="tablist">
-              <!-- ... (onglets inchangés) ... -->
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="login-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#login-tab-pane"
+                  type="button"
+                  role="tab"
+                >
+                  Connexion
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="register-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#register-tab-pane"
+                  type="button"
+                  role="tab"
+                >
+                  Inscription
+                </button>
+              </li>
             </ul>
             <div class="tab-content pt-3" id="authTabContent">
-              <!-- ... (contenu des onglets inchangé) ... -->
+              <div
+                class="tab-pane fade show active"
+                id="login-tab-pane"
+                role="tabpanel"
+              >
+                <form id="login-form">
+                  <div class="mb-3">
+                    <label for="login-pseudo" class="form-label">Pseudo</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      id="login-pseudo"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="login-password" class="form-label"
+                      >Mot de passe</label
+                    ><input
+                      type="password"
+                      class="form-control"
+                      id="login-password"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">
+                    Se connecter
+                  </button>
+                </form>
+                <div
+                  id="login-message"
+                  class="mt-3 text-center fw-semibold"
+                  style="height: 24px"
+                ></div>
+              </div>
+              <div class="tab-pane fade" id="register-tab-pane" role="tabpanel">
+                <form id="register-form">
+                  <div class="mb-3">
+                    <label for="register-pseudo" class="form-label"
+                      >Pseudo</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      id="register-pseudo"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="register-password" class="form-label"
+                      >Mot de passe</label
+                    ><input
+                      type="password"
+                      class="form-control"
+                      id="register-password"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100">
+                    Créer un compte
+                  </button>
+                </form>
+                <div
+                  id="register-message"
+                  class="mt-3 text-center fw-semibold"
+                  style="height: 24px"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Fenêtre Modale pour le Magasin -->
     <div
       class="modal fade"
       id="storeModal"
@@ -247,13 +340,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script type="module" src="twitch.js"></script>
+
     <script>
-      // --- État global de l'application ---
       const API_URL = "https://la-peche-du-capitaine-roro-backend.onrender.com";
       let currentUser = null;
       let token = null;
 
-      // --- Références DOM ---
       const playerNameEl = document.getElementById("player-name");
       const playerMoneyEl = document.getElementById("player-money");
       const inventoryListEl = document.getElementById("inventory-list");
@@ -273,7 +365,6 @@
       );
       const storeMessageEl = document.getElementById("store-message");
 
-      // --- Fonctions de mise à jour de l'UI ---
       async function updateUIForLoggedInUser() {
         playerNameEl.textContent = currentUser.pseudo;
         playerMoneyEl.textContent = `${currentUser.argent} $`;
@@ -307,19 +398,18 @@
         }, 4000);
       }
 
-      // --- Logique d'authentification ---
       async function handleLogin(e) {
         e.preventDefault();
-        const email = document.getElementById("login-email").value;
+        const pseudo = document.getElementById("login-pseudo").value;
         const password = document.getElementById("login-password").value;
         try {
           const response = await fetch(`${API_URL}/api/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ pseudo, password }),
           });
           const data = await response.json();
-          if (!response.ok) throw new Error(data.msg);
+          if (!response.ok) throw new Error(data.msg || "Erreur de connexion");
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
           currentUser = data.user;
@@ -333,30 +423,34 @@
       }
 
       async function handleRegister(e) {
-            e.preventDefault();
-            const pseudo = document.getElementById('register-pseudo').value;
-            const password = document.getElementById('register-password').value;
+        e.preventDefault();
+        const pseudo = document.getElementById("register-pseudo").value;
+        const password = document.getElementById("register-password").value;
+        try {
+          const response = await fetch(`${API_URL}/api/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pseudo, password }),
+          });
+          if (!response.ok) {
+            let errorMsg = "Une erreur serveur est survenue.";
             try {
-                const response = await fetch(`${API_URL}/api/register`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ pseudo, password }),
-                });
-                if (!response.ok) {
-                    let errorMsg = "Une erreur serveur est survenue.";
-                    try {
-                        const errorData = await response.json();
-                        errorMsg = errorData.msg || errorMsg;
-                    } catch (jsonError) {}
-                    throw new Error(errorMsg);
-                }
-                const data = await response.json();
-                afficherMessage(registerMessageEl, data.msg + " Vous pouvez maintenant vous connecter.", true);
-                registerForm.reset();
-            } catch (error) {
-                afficherMessage(registerMessageEl, error.message, false);
-            }
+              const errorData = await response.json();
+              errorMsg = errorData.msg || errorMsg;
+            } catch (jsonError) {}
+            throw new Error(errorMsg);
+          }
+          const data = await response.json();
+          afficherMessage(
+            registerMessageEl,
+            data.msg + " Vous pouvez maintenant vous connecter.",
+            true
+          );
+          registerForm.reset();
+        } catch (error) {
+          afficherMessage(registerMessageEl, error.message, false);
         }
+      }
 
       function logout() {
         localStorage.removeItem("token");
@@ -378,7 +472,22 @@
         }
       }
 
-      // --- Logique de jeu ---
+      function handleTwitchCallback() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const twitchToken = urlParams.get("token");
+        const twitchUserString = urlParams.get("user");
+
+        if (twitchToken && twitchUserString) {
+          const twitchUser = JSON.parse(decodeURIComponent(twitchUserString));
+          localStorage.setItem("token", twitchToken);
+          localStorage.setItem("user", JSON.stringify(twitchUser));
+          currentUser = twitchUser;
+          token = twitchToken;
+          updateUIForLoggedInUser();
+          window.history.replaceState({}, document.title, "/");
+        }
+      }
+
       async function handleFish() {
         if (!token) {
           afficherMessage(
@@ -445,7 +554,6 @@
         }
       }
 
-      // --- Logique du Magasin ---
       async function fetchStoreItems() {
         storeItemsContainer.innerHTML = `<div class="text-center"><div class="spinner-border text-primary"></div></div>`;
         try {
@@ -505,43 +613,17 @@
           button.textContent = `${itemPrice} $`;
         }
       }
-      function handleTwitchCallback() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const twitchToken = urlParams.get("token");
-        const twitchUserString = urlParams.get("user");
-
-        if (twitchToken && twitchUserString) {
-          // On a reçu les informations de Twitch
-          const twitchUser = JSON.parse(decodeURIComponent(twitchUserString));
-
-          // On stocke les informations comme pour une connexion normale
-          localStorage.setItem("token", twitchToken);
-          localStorage.setItem("user", JSON.stringify(twitchUser));
-
-          // On met à jour l'interface
-          currentUser = twitchUser;
-          token = twitchToken;
-          updateUIForLoggedInUser();
-
-          // On nettoie l'URL pour ne pas garder les paramètres visibles
-          window.history.replaceState({}, document.title, "/");
-        }
-      }
-
-      // --- Initialisation (MISE À JOUR) ---
-      window.addEventListener("load", () => {
-        handleTwitchCallback(); // Vérifier si on vient d'une redirection Twitch
-        checkLoginStatus(); // Vérifier une session existante
-        initializeTwitchEmbeds();
-      });
       // --- Écouteurs d'événements ---
       castLineBtn.addEventListener("click", handleFish);
       loginForm.addEventListener("submit", handleLogin);
       registerForm.addEventListener("submit", handleRegister);
       storeItemsContainer.addEventListener("click", handleBuyItem);
 
-      // --- Initialisation ---
-      checkLoginStatus();
+      window.addEventListener("load", () => {
+        handleTwitchCallback();
+        checkLoginStatus();
+        initializeTwitchEmbeds();
+      });
     </script>
   </body>
 </html>
