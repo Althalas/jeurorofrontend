@@ -1,6 +1,12 @@
 body {
-  background-color: #050505;
+  background-color: #eef5ff;
   background-image: url("https://cdnb.artstation.com/p/assets/images/images/033/013/827/4k/imanol-delgado-salazar-afterlife-10.jpg?1608139785");
+}
+.logo-img {
+  border-radius: 50%;
+}
+[data-bs-theme="dark"] body {
+  background-color: #1a1a1a;
 }
 .game-container {
   background-color: black;

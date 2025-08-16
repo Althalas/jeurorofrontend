@@ -1,3 +1,4 @@
+//Stock toutes les requêtes API
 const API_URL =
   "[https://la-peche-du-capitaine-roro-backend.onrender.com](https://la-peche-du-capitaine-roro-backend.onrender.com)";
 

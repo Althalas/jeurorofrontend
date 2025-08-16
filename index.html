@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,31 +15,51 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="text-secondary">
-    <div class="container my-4 my-md-5">
-      <header class="text-center mb-5">
-        <h1 class="display-4 fw-bold text-primary">
-          La Pêche du Capitaine Roro
-        </h1>
-        <p class="lead text-primary-emphasis">Le jeu de pêche ultime</p>
-        <div id="auth-buttons" class="d-flex justify-content-center gap-2">
+    <header class="text-center mb-5">
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <!-- Emplacement pour le logo -->
+            <img
+              src="https://placehold.co/40x40/0d6efd/ffffff?text=PR"
+              alt="Logo RoroLeBateau twitch"
+              class="logo-img me-2"
+            />
+            La Pêche du Capitaine Roro
+          </a>
           <button
-            class="btn btn-outline-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#authModal"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <i class="bi bi-person-circle"></i> Connexion / Inscription
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <button
-            id="store-btn"
-            class="btn btn-outline-success"
-            data-bs-toggle="modal"
-            data-bs-target="#storeModal"
-            disabled
-          >
-            <i class="bi bi-shop"></i> Magasin
-          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+              <a class="nav-link" href="/port.html">Port</a>
+              <a class="nav-link" href="/cargaison.html">Cargaison</a>
+              <a class="nav-link" href="/apropos.html">A propos</a>
+              <li class="nav-item" id="auth-nav-item">
+                <button
+                  class="btn btn-outline-primary ms-lg-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#authModal"
+                >
+                  <i class="bi bi-person-circle"></i> Connexion
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </header>
+      </nav>
+    </header>
+    <div class="container my-4 my-md-5">
       <section class="mt-5">
         <h2 class="display-6 fw-bold text-primary text-center mb-4">
           Live Twitch
@@ -49,24 +69,22 @@
           <div class="col-lg-8">
             <div class="card shadow-sm">
               <div class="card-header">
-                <h3 class="h5 mb-0">
-                  <i class="bi bi-twitch"></i> Stream en direct
-                </h3>
+                <h3 class="h5 mb-0"><i class="bi bi-twitch"></i> Stream</h3>
               </div>
               <div class="card-body">
-                <!-- Le conteneur pour le lecteur vidéo Twitch -->
+                <!-- Twitch Embed pour récup la vidéo check la doc pour options -->
                 <div id="twitch-embed" class="twitch-embed"></div>
               </div>
             </div>
           </div>
-          <!-- Chat -->
+          <!-- Chat Twitch -->
           <div class="col-lg-4">
             <div class="card shadow-sm">
               <div class="card-header">
                 <h3 class="h5 mb-0"><i class="bi bi-chat-dots"></i> Chat</h3>
               </div>
               <div class="card-body p-0">
-                <!-- Le conteneur pour le chat Twitch -->
+                <!-- Le conteneur avec Iframe si on le veut à part de la vidéo -->
                 <div id="twitch-chat-embed" class="twitch-chat-container">
                   <iframe
                     id="twitch-chat-embed"
@@ -128,14 +146,14 @@
                 </p>
               </div>
               <div>
-                <h3 class="h5 mb-2">Inventaire des Poissons</h3>
+                <h3 class="h5 mb-2">historique des Prises</h3>
                 <ul
                   id="inventory-list"
                   class="list-group"
                   style="height: 200px; overflow-y: auto"
                 >
                   <li class="list-group-item text-muted">
-                    Connectez-vous pour voir votre inventaire.
+                    Connectez-vous pour voir votre historique.
                   </li>
                 </ul>
               </div>
@@ -145,67 +163,138 @@
       </main>
     </div>
 
-     <!-- Fenêtre Modale pour l'Authentification -->
-    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"><h1 class="modal-title fs-5" id="authModalLabel">Authentification</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <div class="modal-body">
-                    <!-- Connexion Twitch -->
-                    <a href="https://la-peche-du-capitaine-roro-backend.onrender.com/api/auth/twitch" class="btn w-100 mb-3" style="background-color: #9146FF; color: white;">
-                        <i class="bi bi-twitch"></i> Se connecter avec Twitch
-                    </a>
-                    <hr>
-                    <!-- Connexion par Pseudo/Mot de passe -->
-                    <ul class="nav nav-tabs" id="authTab" role="tablist">
-                        <li class="nav-item" role="presentation"><button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane" type="button" role="tab">Connexion</button></li>
-                        <li class="nav-item" role="presentation"><button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-tab-pane" type="button" role="tab">Inscription</button></li>
-                    </ul>
-                    <div class="tab-content pt-3" id="authTabContent">
-                        <div class="tab-pane fade show active" id="login-tab-pane" role="tabpanel">
-                             <form id="login-form">
-                                <div class="mb-3"><label for="login-pseudo" class="form-label">Pseudo</label><input type="text" class="form-control" id="login-pseudo" required></div>
-                                <div class="mb-3"><label for="login-password" class="form-label">Mot de passe</label><input type="password" class="form-control" id="login-password" required></div>
-                                <button type="submit" class="btn btn-primary w-100">Se connecter</button>
-                            </form>
-                            <div id="login-message" class="mt-3 text-center fw-semibold" style="height: 24px;"></div>
-                        </div>
-                        <div class="tab-pane fade" id="register-tab-pane" role="tabpanel">
-                            <form id="register-form">
-                                <div class="mb-3"><label for="register-pseudo" class="form-label">Pseudo</label><input type="text" class="form-control" id="register-pseudo" required></div>
-                                <div class="mb-3"><label for="register-password" class="form-label">Mot de passe</label><input type="password" class="form-control" id="register-password" required></div>
-                                <button type="submit" class="btn btn-success w-100">Créer un compte</button>
-                            </form>
-                            <div id="register-message" class="mt-3 text-center fw-semibold" style="height: 24px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-            <!-- NOUVEAU : Bouton de connexion Twitch -->
+    <!-- Fenêtre pour l'Auth -->
+    <div
+      class="modal fade"
+      id="authModal"
+      tabindex="-1"
+      aria-labelledby="authModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="authModalLabel">
+              Authentification
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Connexion Twitch -->
             <a
               href="https://la-peche-du-capitaine-roro-backend.onrender.com/api/auth/twitch"
-              class="btn w-100"
+              class="btn w-100 mb-3"
               style="background-color: #9146ff; color: white"
             >
               <i class="bi bi-twitch"></i> Se connecter avec Twitch
             </a>
             <hr />
-            <!-- Onglets pour la connexion par email -->
+            <!-- Connexion basique par mdp/username -->
             <ul class="nav nav-tabs" id="authTab" role="tablist">
-              <!-- ... (onglets inchangés) ... -->
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="login-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#login-tab-pane"
+                  type="button"
+                  role="tab"
+                >
+                  Connexion
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="register-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#register-tab-pane"
+                  type="button"
+                  role="tab"
+                >
+                  Inscription
+                </button>
+              </li>
             </ul>
             <div class="tab-content pt-3" id="authTabContent">
-              <!-- ... (contenu des onglets inchangé) ... -->
+              <div
+                class="tab-pane fade show active"
+                id="login-tab-pane"
+                role="tabpanel"
+              >
+                <form id="login-form">
+                  <div class="mb-3">
+                    <label for="login-pseudo" class="form-label">Pseudo</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      id="login-pseudo"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="login-password" class="form-label"
+                      >Mot de passe</label
+                    ><input
+                      type="password"
+                      class="form-control"
+                      id="login-password"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">
+                    Se connecter
+                  </button>
+                </form>
+                <div
+                  id="login-message"
+                  class="mt-3 text-center fw-semibold"
+                  style="height: 24px"
+                ></div>
+              </div>
+              <div class="tab-pane fade" id="register-tab-pane" role="tabpanel">
+                <form id="register-form">
+                  <div class="mb-3">
+                    <label for="register-pseudo" class="form-label"
+                      >Pseudo</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      id="register-pseudo"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="register-password" class="form-label"
+                      >Mot de passe</label
+                    ><input
+                      type="password"
+                      class="form-control"
+                      id="register-password"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100">
+                    Créer un compte
+                  </button>
+                </form>
+                <div
+                  id="register-message"
+                  class="mt-3 text-center fw-semibold"
+                  style="height: 24px"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Fenêtre Modale pour le Magasin -->
+    <!-- Fenêtre pour le Magasin -->
     <div
       class="modal fade"
       id="storeModal"
@@ -243,7 +332,39 @@
         </div>
       </div>
     </div>
-
+    <footer class="text-center mt-5 pt-4 pb-3 bg-body-tertiary">
+      <p>&copy; 2025 La Pêche du Capitaine Roro</p>
+      <p>Mes réseaux sociaux</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="https://www.instagram.com/le.roro.37/" target="_blank"
+            ><i class="bi bi-instagram"></i
+          ></a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://www.tiktok.com/@le.roro37" target="_blank"
+            ><i class="bi bi-tiktok"></i
+          ></a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://www.twitch.tv/rorolebateau" target="_blank"
+            ><i class="bi bi-twitch"></i
+          ></a>
+        </li>
+        <li class="list-inline-item">
+          <a
+            href="https://www.youtube.com/@RoroLeBateau/featured"
+            target="_blank"
+            ><i class="bi bi-youtube"></i
+          ></a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://discord.com/invite/q7RZrz8" target="_blank"
+            ><i class="bi bi-discord"></i
+          ></a>
+        </li>
+      </ul>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script type="module" src="JS/main.js"></script>
