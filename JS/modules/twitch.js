@@ -13,6 +13,3 @@ export function initializeTwitchEmbeds() {
     parent: [parentDomain], // Requis par Twitch pour la sécurité
   });
 }
-
-// On attend que la page soit entièrement chargée pour initialiser les embeds
-window.addEventListener("load", initializeTwitchEmbeds);
